@@ -154,7 +154,7 @@ resource "aws_rds_cluster_instance" "this" {
   monitoring_role_arn                   = local.rds_enhanced_monitoring_arn
   monitoring_interval                   = lookup(each.value, "monitoring_interval", var.monitoring_interval)
   promotion_tier                        = lookup(each.value, "promotion_tier", null)
-  availability_zone                     = lookup(each.value, "availability_zone", var.availability_zone)
+  availability_zone                     = var.availability_zone
   preferred_maintenance_window          = lookup(each.value, "preferred_maintenance_window", var.preferred_maintenance_window)
   auto_minor_version_upgrade            = lookup(each.value, "auto_minor_version_upgrade", var.auto_minor_version_upgrade)
   performance_insights_enabled          = lookup(each.value, "performance_insights_enabled", var.performance_insights_enabled)
