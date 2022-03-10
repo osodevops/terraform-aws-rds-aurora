@@ -337,8 +337,8 @@ variable "instance_timeouts" {
   default     = {}
 }
 
-variable "availability_zone" {
-  description = "The list of availability zone"
+variable "availability_zones" {
+  description = "The list of availability zones."
   type        = list(string)
   default     = []
 }

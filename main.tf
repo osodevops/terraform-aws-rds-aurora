@@ -54,6 +54,9 @@ resource "aws_rds_cluster" "this" {
   replication_source_identifier  = var.replication_source_identifier
   source_region                  = var.source_region
 
+
+  availability_zones             = var.availability_zones
+
   engine                              = var.engine
   engine_mode                         = var.engine_mode
   engine_version                      = local.is_serverless ? null : var.engine_version
@@ -154,7 +157,7 @@ resource "aws_rds_cluster_instance" "this" {
   monitoring_role_arn                   = local.rds_enhanced_monitoring_arn
   monitoring_interval                   = lookup(each.value, "monitoring_interval", var.monitoring_interval)
   promotion_tier                        = lookup(each.value, "promotion_tier", null)
-  availability_zone                     = var.availability_zone
+  availability_zone                     = lookup(each.value, "availability_zone", null)
   preferred_maintenance_window          = lookup(each.value, "preferred_maintenance_window", var.preferred_maintenance_window)
   auto_minor_version_upgrade            = lookup(each.value, "auto_minor_version_upgrade", var.auto_minor_version_upgrade)
   performance_insights_enabled          = lookup(each.value, "performance_insights_enabled", var.performance_insights_enabled)
