@@ -339,7 +339,7 @@ variable "instance_timeouts" {
 
 variable "availability_zone" {
   description = "The list of availability zone"
-  type        = map(string)
+  type        = list(string)
   default     = []
 }
 # aws_rds_cluster_endpoint
