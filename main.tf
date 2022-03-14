@@ -18,8 +18,13 @@ data "aws_partition" "current" {}
 resource "random_password" "master_password" {
   count = var.create_cluster && var.create_random_password ? 1 : 0
 
-  length  = var.random_password_length
-  special = false
+  length            = var.random_password_length
+  special           = true
+  min_lower         = 3
+  min_numeric       = 3
+  min_upper         = 3
+  min_special       = 3
+  override_special  = "!#$&()-_=+[]{}<>:?"
 }
 
 resource "random_id" "snapshot_identifier" {
@@ -157,7 +162,7 @@ resource "aws_rds_cluster_instance" "this" {
   monitoring_role_arn                   = local.rds_enhanced_monitoring_arn
   monitoring_interval                   = lookup(each.value, "monitoring_interval", var.monitoring_interval)
   promotion_tier                        = lookup(each.value, "promotion_tier", null)
-  availability_zone                     = lookup(each.value, "availability_zone", null)
+  availability_zone                     = lookup(each.value, "availability_zone", var.availability_zone)
   preferred_maintenance_window          = lookup(each.value, "preferred_maintenance_window", var.preferred_maintenance_window)
   auto_minor_version_upgrade            = lookup(each.value, "auto_minor_version_upgrade", var.auto_minor_version_upgrade)
   performance_insights_enabled          = lookup(each.value, "performance_insights_enabled", var.performance_insights_enabled)

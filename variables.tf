@@ -123,7 +123,7 @@ variable "create_random_password" {
 variable "random_password_length" {
   description = "Length of random password to create. Defaults to `10`"
   type        = number
-  default     = 10
+  default     = 12
 }
 
 variable "master_password" {
@@ -342,6 +342,14 @@ variable "availability_zones" {
   type        = list(string)
   default     = []
 }
+
+
+variable "availability_zone" {
+  description = "The zone to deploy the instance in."
+  type        = string
+  default     = ""
+}
+
 # aws_rds_cluster_endpoint
 variable "endpoints" {
   description = "Map of additional cluster endpoints and their attributes to be created"
