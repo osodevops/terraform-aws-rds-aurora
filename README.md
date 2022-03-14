@@ -23,8 +23,11 @@ module "cluster" {
   engine_version = "11.12"
   instance_class = "db.r6g.large"
   instances = {
-    one = {}
+    one = {
+      availability_zone = "eu-west-2a"
+    }
     2 = {
+      availability_zone = "eu-west-2b"
       instance_class = "db.r6g.2xlarge"
     }
   }
