@@ -102,6 +102,18 @@ variable "kms_key_id" {
   default     = null
 }
 
+variable "cluster_performance_insights_enabled" {
+  description = "Valid only for Non-Aurora Multi-AZ DB Clusters. Enables Performance Insights for the RDS Cluster"
+  type        = bool
+  default     = null
+}
+
+variable "cluster_performance_insights_kms_key_id" {
+  description = "Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds)"
+  type        = string
+  default     = null
+}
+
 variable "database_name" {
   description = "Name for an automatically created database on cluster creation"
   type        = string

@@ -18,13 +18,13 @@ data "aws_partition" "current" {}
 resource "random_password" "master_password" {
   count = var.create_cluster && var.create_random_password ? 1 : 0
 
-  length            = var.random_password_length
-  special           = true
-  min_lower         = 3
-  min_numeric       = 3
-  min_upper         = 3
-  min_special       = 3
-  override_special  = "!#$&()-_=+[]{}<>:?"
+  length           = var.random_password_length
+  special          = true
+  min_lower        = 3
+  min_numeric      = 3
+  min_upper        = 3
+  min_special      = 3
+  override_special = "!#$&()-_=+[]{}<>:?"
 }
 
 resource "random_id" "snapshot_identifier" {
@@ -60,7 +60,7 @@ resource "aws_rds_cluster" "this" {
   source_region                  = var.source_region
 
 
-  availability_zones             = var.availability_zones
+  availability_zones = var.availability_zones
 
   engine                              = var.engine
   engine_mode                         = var.engine_mode
@@ -89,6 +89,9 @@ resource "aws_rds_cluster" "this" {
   backtrack_window                    = local.backtrack_window
   copy_tags_to_snapshot               = var.copy_tags_to_snapshot
   enabled_cloudwatch_logs_exports     = var.enabled_cloudwatch_logs_exports
+
+  performance_insights_enabled    = var.cluster_performance_insights_enabled
+  performance_insights_kms_key_id = var.cluster_performance_insights_kms_key_id
 
   timeouts {
     create = lookup(var.cluster_timeouts, "create", null)
