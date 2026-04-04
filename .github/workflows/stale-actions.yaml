@@ -3,11 +3,15 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
+permissions:
+  issues: write
+  pull-requests: write
+
 jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v4
+      - uses: actions/stale@a20b814fb01b71def3bd6f56e7494d667ddf28da # v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           # Staling issues and PR's
